@@ -1,6 +1,8 @@
 # Dockerを使用したサーバ構築
 
-## イメージ及びコンテナの起動
+## server1の解説
+
+### イメージ及びコンテナの起動
 
 centos-sv1ディレクトリに移動
 ```shell
@@ -22,14 +24,15 @@ $ docker-compose up -d
  - Container apache Started      6.0s 
  - Container bind Started        5.7s    
 ```
-bindコンテナに/bin/bashで起動
+### bindの設定
+コンテナに/bin/bashで起動
 ```shell
 $ docker exec -it bind /bin/bash
 ```
-## nameserverのIP設定
+nameserverのIP設定
 
 ```shell
-# cat /etc/resolv.conf
+$ cat /etc/resolv.conf
 ```
 ```shell
 nameserver 127.0.0.11
@@ -37,20 +40,54 @@ options ndots:0
 ```
 
 ```shell
-# vi /etc/resolv.conf
+$ vi /etc/resolv.conf
 ```
 ```shell
 nameserver 172.18.0.2
 options ndots:0
 ```
 
-## ファイアウォールのサービス設定
+ファイアウォールのサービス設定
 ```shell
-# firewall-cmd --add-service dns
-# firewall-cmd --add-service dns --permanent
-# firewall-cmd --reload
+$ firewall-cmd --add-service dns
+$ firewall-cmd --add-service dns --permanent
+$ firewall-cmd --reload
 ```
-## named.serverの再起動
+named.serverの再起動
 ```shell
-# systemctl restart named
+$ systemctl restart named
+```
+
+### apacheの設定
+コンテナに/bin/bashで起動
+```shell
+$ docker exec -it apache /bin/bash
+```
+nameserverのIP設定
+
+```shell
+$ cat /etc/resolv.conf
+```
+```shell
+nameserver 127.0.0.11
+options ndots:0
+```
+
+```shell
+$ vi /etc/resolv.conf
+```
+```shell
+nameserver 172.18.0.2
+options ndots:0
+```
+
+ファイアウォールのサービス設定
+```shell
+$ firewall-cmd --add-service http
+$ firewall-cmd --add-service http --permanent
+$ firewall-cmd --reload
+```
+apacheサービスの再起動
+```shell
+$ systemctl restart httpd
 ```
