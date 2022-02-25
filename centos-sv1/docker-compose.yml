@@ -1,0 +1,39 @@
+version: "3.3"
+
+services:
+  dns:
+    build: ././bind
+    image: centos/bind:1
+    container_name: bind
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+      - "53/udp"
+      - "53/tcp"
+    networks:
+      docker_network:
+        ipv4_address: 172.18.0.2
+    privileged: true
+    restart: always
+    
+  web:
+    build: ././apache
+    image: centos/apache:1
+    container_name: apache
+    ports:
+      - "80:80"
+      - "8080:80"
+    networks:
+      docker_network:
+        ipv4_address: 172.18.0.3
+    privileged: true
+    restart: always
+
+networks:
+  docker_network:
+    name: docker_network
+    driver: bridge
+    ipam: 
+      driver: default
+      config:
+        - subnet: 172.18.0.0/16

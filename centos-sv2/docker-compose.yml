@@ -1,0 +1,37 @@
+version: "3.3"
+
+services:
+  dns:
+    build: ././bind
+    image: centos/bind:2
+    container_name: bind
+    ports:
+      - "53:53/udp"
+      - "53/udp"
+      - "53/tcp"
+    networks:
+      compose_network:
+        ipv4_address: 172.19.0.2
+    privileged: true
+    restart: always
+  proxy:
+    build: ././squid
+    image: centos/squid:2
+    container_name: squid
+    ports:
+      - "8080:8080/tcp"
+      - "8080/tcp"
+    networks:
+      compose_network:
+        ipv4_address: 172.19.0.3
+    privileged: true
+    restart: always
+
+networks:
+  compose_network:
+    name: compose_network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.0.0/16

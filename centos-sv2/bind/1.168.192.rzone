@@ -1,0 +1,12 @@
+$TTL 3H
+
+@       IN      SOA     dns2.j21.jyoho.com.     postmaster.j21.jyoho.com. (
+        2020050901      ; serial
+                1D      ; refresh
+                1H      ; retry
+                1W      ; exprire
+                3H )    ; minimum
+
+        IN      NS      dns2.j21.jyoho.com.
+
+130     IN      PTR     dns2.j21.jyoho.com.

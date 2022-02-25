@@ -1,0 +1,17 @@
+$TTL 3H
+
+@       IN      SOA     j21.jyoho.com. postmaster.j21.jyoho.com. (
+        2022020701      ;serial
+        1D              ;refresh
+        1H              ;retry
+        1W              ;exprire
+        3H )            ;minimum
+
+        IN      NS      dns1.j21.jyoho.com.
+        IN      NS      dns2.j21.jyoho.com.
+
+dns1    IN      A       172.16.1.194
+dns2    IN      A       192.168.1.130
+
+www     IN      CNAME   dns1
+proxy   IN      CNAME   dns2
