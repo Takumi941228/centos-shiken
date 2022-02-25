@@ -1,35 +1,35 @@
-# Docker‚ğg—p‚µ‚½ƒT[ƒo\’z
+# Dockerã‚’ä½¿ç”¨ã—ãŸã‚µãƒ¼ãƒæ§‹ç¯‰
 
-## server1‚Ì‰ğà
+## server1ã®è§£èª¬
 
-### ƒCƒ[ƒW‹y‚ÑƒRƒ“ƒeƒi‚Ì‹N“®
+### ã‚¤ãƒ¡ãƒ¼ã‚¸åŠã³ã‚³ãƒ³ãƒ†ãƒŠã®èµ·å‹•
 
-centos-sv1ƒfƒBƒŒƒNƒgƒŠ‚ÉˆÚ“®
+centos-sv1ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«ç§»å‹•
 ```shell
 $ cd centos-sv1
 ```
 
-ˆÈ‘O‚ÌƒLƒƒƒVƒ…‚ğg—p‚¹‚¸ƒrƒ‹ƒh‚·‚é
+ä»¥å‰ã®ã‚­ãƒ£ã‚·ãƒ¥ã‚’ä½¿ç”¨ã›ãšãƒ“ãƒ«ãƒ‰ã™ã‚‹
 ```shell
 $ docker-compose build --no-cache
 ```
 
-ƒRƒ“ƒeƒi‚ğ‹N“®‚·‚é
+ã‚³ãƒ³ãƒ†ãƒŠã‚’èµ·å‹•ã™ã‚‹
 ```shell
 $ docker-compose up -d
 ```
-ƒRƒ“ƒeƒi‚ª³í‚É‹N“®‚·‚ê‚ÎˆÈ‰º‚Ì‚æ‚¤‚É‚È‚é
+ã‚³ãƒ³ãƒ†ãƒŠãŒæ­£å¸¸ã«èµ·å‹•ã™ã‚Œã°ä»¥ä¸‹ã®ã‚ˆã†ã«ãªã‚‹
 ```shell
  [+] Running 2/2
  - Container apache Started      6.0s 
  - Container bind Started        5.7s    
 ```
-### bind‚Ìİ’è
-ƒRƒ“ƒeƒi‚É/bin/bash‚Å‹N“®
+### bindã®è¨­å®š
+ã‚³ãƒ³ãƒ†ãƒŠã«/bin/bashã§èµ·å‹•
 ```shell
 $ docker exec -it bind /bin/bash
 ```
-nameserver‚ÌIPİ’è
+nameserverã®IPè¨­å®š
 
 ```shell
 $ cat /etc/resolv.conf
@@ -47,23 +47,23 @@ nameserver 172.18.0.2
 options ndots:0
 ```
 
-ƒtƒ@ƒCƒAƒEƒH[ƒ‹‚ÌƒT[ƒrƒXİ’è
+ãƒ•ã‚¡ã‚¤ã‚¢ã‚¦ã‚©ãƒ¼ãƒ«ã®ã‚µãƒ¼ãƒ“ã‚¹è¨­å®š
 ```shell
 $ firewall-cmd --add-service dns
 $ firewall-cmd --add-service dns --permanent
 $ firewall-cmd --reload
 ```
-named.server‚ÌÄ‹N“®
+named.serverã®å†èµ·å‹•
 ```shell
 $ systemctl restart named
 ```
 
-### apache‚Ìİ’è
-ƒRƒ“ƒeƒi‚É/bin/bash‚Å‹N“®
+### apacheã®è¨­å®š
+ã‚³ãƒ³ãƒ†ãƒŠã«/bin/bashã§èµ·å‹•
 ```shell
 $ docker exec -it apache /bin/bash
 ```
-nameserver‚ÌIPİ’è
+nameserverã®IPè¨­å®š
 
 ```shell
 $ cat /etc/resolv.conf
@@ -81,13 +81,13 @@ nameserver 172.18.0.2
 options ndots:0
 ```
 
-ƒtƒ@ƒCƒAƒEƒH[ƒ‹‚ÌƒT[ƒrƒXİ’è
+ãƒ•ã‚¡ã‚¤ã‚¢ã‚¦ã‚©ãƒ¼ãƒ«ã®ã‚µãƒ¼ãƒ“ã‚¹è¨­å®š
 ```shell
 $ firewall-cmd --add-service http
 $ firewall-cmd --add-service http --permanent
 $ firewall-cmd --reload
 ```
-apacheƒT[ƒrƒX‚ÌÄ‹N“®
+apacheã‚µãƒ¼ãƒ“ã‚¹ã®å†èµ·å‹•
 ```shell
 $ systemctl restart httpd
 ```
